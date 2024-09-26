@@ -4,7 +4,8 @@
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "Order"
+    "displayName": "Order",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,10 +13,17 @@
   "pluginOptions": {},
   "attributes": {
     "stripeid": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "products": {
       "type": "json"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "orders"
     }
   }
 }

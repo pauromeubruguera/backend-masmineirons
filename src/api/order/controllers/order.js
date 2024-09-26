@@ -1,5 +1,5 @@
 'use strict';
-
+const jwt = require('jsonwebtoken');
 //@ts-ignore
 const stripe = require("stripe")(process.env.STRIPE_KEY
 )
@@ -13,7 +13,10 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController("api::order.order", ({ strapi }) => ({
     async create(ctx) {
         //@ts-ignore
-        const { products } = ctx.request.body
+        const { products, userToken } = ctx.request.body
+
+        const decoded = jwt.verify(userToken, process.env.JWT_SECRET)
+        const userId = decoded.id || decoded.sub
 
         try {
             const lineItems = await Promise.all(
@@ -30,7 +33,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
                             },
                             unit_amount: Math.round(item.price * 100)
                         },
-                        quantity: 1
+                        quantity: item.stock >= product.attributes.quantity && product.attributes.quantity
                     }
                 })
             );
@@ -38,12 +41,12 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
                 shipping_address_collection: { allowed_countries: ["ES"] },
                 payment_method_types: ["card"],
                 mode: "payment",
-                success_url: process.env.CLIENT_URL + "/success",
-                cancel_url: process.env.CLIENT_URL + "/successError",
-                line_items: lineItems,
+                success_url: process.env.CLIENT_URL + "/es/success",
+                cancel_url: process.env.CLIENT_URL + "/es/error",
+                line_items: lineItems
             });
-
-            await strapi.service("api::order.order").create({ data: { products, stripeId: session.id } });
+            
+            await strapi.service("api::order.order").create({ data: { products, stripeid: userId + "-" + Date.now(), users: userId } });
 
             return { stripeSession: session }
 

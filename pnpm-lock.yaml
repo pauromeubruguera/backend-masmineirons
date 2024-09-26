@@ -9447,7 +9447,7 @@ snapshots:
       postcss-modules-scope: 3.2.0(postcss@8.4.45)
       postcss-modules-values: 4.0.0(postcss@8.4.45)
       postcss-value-parser: 4.2.0
-      semver: 7.5.4
+      semver: 7.6.3
     optionalDependencies:
       webpack: 5.94.0(esbuild@0.19.11)
 
@@ -10098,7 +10098,7 @@ snapshots:
       minimatch: 3.1.2
       node-abort-controller: 3.1.1
       schema-utils: 3.3.0
-      semver: 7.5.4
+      semver: 7.6.3
       tapable: 2.2.1
       typescript: 5.2.2
       webpack: 5.94.0(esbuild@0.19.11)
@@ -10202,7 +10202,7 @@ snapshots:
       get-it: 8.6.5(debug@4.3.4)
       registry-auth-token: 5.0.2
       registry-url: 5.1.0
-      semver: 7.5.4
+      semver: 7.6.3
     transitivePeerDependencies:
       - debug
 
@@ -11466,7 +11466,7 @@ snapshots:
       ignore-by-default: 1.0.1
       minimatch: 3.1.2
       pstree.remy: 1.1.8
-      semver: 7.5.4
+      semver: 7.6.3
       simple-update-notifier: 2.0.0
       supports-color: 5.5.0
       touch: 3.1.1
@@ -11667,7 +11667,7 @@ snapshots:
       got: 11.8.6
       registry-auth-token: 4.2.2
       registry-url: 5.1.0
-      semver: 7.5.4
+      semver: 7.6.3
 
   param-case@2.1.1:
     dependencies:
@@ -12503,7 +12503,7 @@ snapshots:
       detect-libc: 2.0.3
       node-addon-api: 6.1.0
       prebuild-install: 7.1.2
-      semver: 7.5.4
+      semver: 7.6.3
       simple-get: 4.0.1
       tar-fs: 3.0.6
       tunnel-agent: 0.6.0
@@ -12547,7 +12547,7 @@ snapshots:
 
   simple-update-notifier@2.0.0:
     dependencies:
-      semver: 7.5.4
+      semver: 7.6.3
 
   sirv@2.0.4:
     dependencies:
