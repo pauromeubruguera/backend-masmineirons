@@ -16,6 +16,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
         const { products, userToken } = ctx.request.body
 
         const decoded = jwt.verify(userToken, process.env.JWT_SECRET)
+        // @ts-ignore
         const userId = decoded.id || decoded.sub
 
         try {
@@ -38,11 +39,10 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
                 })
             );
             const session = await stripe.checkout.sessions.create({
-                shipping_address_collection: { allowed_countries: ["ES"] },
                 payment_method_types: ["card"],
                 mode: "payment",
                 success_url: process.env.CLIENT_URL + "/es/success",
-                cancel_url: process.env.CLIENT_URL + "/es/error",
+                cancel_url: process.env.CLIENT_URL + "/es/cart",
                 line_items: lineItems
             });
             
