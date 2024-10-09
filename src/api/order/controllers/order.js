@@ -13,7 +13,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController("api::order.order", ({ strapi }) => ({
     async create(ctx) {
         //@ts-ignore
-        const { products, userToken } = ctx.request.body
+        const { products, userToken, address } = ctx.request.body
 
         const decoded = jwt.verify(userToken, process.env.JWT_SECRET)
         // @ts-ignore
@@ -46,7 +46,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
                 line_items: lineItems
             });
             
-            await strapi.service("api::order.order").create({ data: { products, stripeid: userId + "-" + Date.now(), users: userId } });
+            await strapi.service("api::order.order").create({ data: { products, stripeid: userId + "-" + Date.now(), users: userId, address } });
 
             return { stripeSession: session }
 
